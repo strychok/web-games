@@ -1,5 +1,5 @@
 export function generateCharacters(count){
-    const sprites = ["/sprites/person.svg", "/sprites/person1.svg"];
+    const sprites = ["/sprites/person.svg", "/sprites/person2.svg"];
     const characters = [];
 
     for (let i = 0;i< count;i++) {

@@ -1,40 +1,46 @@
-import "./GameContainer.css"
+import "./GameContainer.css";
 import { generateCharacters } from "../Person/GenerateCharacters";
 import { useState } from "react";
-// import person from './/person.svg'
+import SwipeButton from "../Button";
 
-function GameLogic(){
+// function useGameLogic(){
+//   const [characters] = useState(() => generateCharacters(5));
+//   const [index, setIndex] = useState(0);
+//   const [score, setScore] = useState(0);
+
+//   const current = characters[index];
+
+//   function nextCharacter() {
+//     setIndex(i => Math.min(i + 1, characters.length - 1)); // исправил границу
+//   }
+//   return {characters, current, index, score, nextCharacter};
+// }
+
+export default function GameContainer() {
   const [characters] = useState(() => generateCharacters(5));
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
 
   const current = characters[index];
-  return {characters, current, index, score}
-}
 
+  function nextCharacter() {
+    setIndex(i => Math.min(i + 1, characters.length - 1)); // исправил границу
+    console.log("rkbr")
+  }
 
-
-export default function GameContainer() {
-  const { current } = GameLogic();
-  console.log(current)
   return (
     <div className="main">
-    
       <div className="game">
-        <Button direction="left" />
-        <img src={current.sprite} className="personFront" />
-        <Button direction="right" />
+        <SwipeButton onClick={nextCharacter} />
+        {current && (
+          <img src={current.sprite} alt={current.name} className="personFront" />
+        )}
+        <SwipeButton onClick={nextCharacter} />
       </div>
 
-      <Interface />
-    </div>
+          </div>
   );
 };
-function Button({direction}){
-    return (
-        <button className="directionBtn">{String(direction)}</button>
-    )
-}
 
 function Interface (){
     return (

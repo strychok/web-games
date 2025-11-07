@@ -1,3 +1,5 @@
-export default function Button() {
-    return <button>Click</button>
+export default function SwipeButton({ onClick }) {
+  return (
+    <button onClick={onClick}>Свайп</button>
+  );
 }
