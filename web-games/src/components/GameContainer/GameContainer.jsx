@@ -2,6 +2,7 @@ import "./GameContainer.css";
 import { generateCharacters } from "../Person/GenerateCharacters";
 import { useState } from "react";
 import SwipeButton from "../Button";
+import { DrawAnimateCharacter } from "../Person/DrawAnimateCharacter";
 
 // function useGameLogic(){
 //   const [characters] = useState(() => generateCharacters(5));
@@ -17,25 +18,40 @@ import SwipeButton from "../Button";
 // }
 
 export default function GameContainer() {
-  const [characters] = useState(() => generateCharacters(5));
-  const [index, setIndex] = useState(0);
+  const [current, setCharacter] = useState(() => generateCharacters());
+  const [direction, setDirection] = useState(0);
   const [score, setScore] = useState(0);
+  const [level, setLevel] = useState(0);
+  const [move, setMove] = useState(false);
 
-  const current = characters[index];
-
-  function nextCharacter() {
-    setIndex(i => Math.min(i + 1, characters.length - 1)); // исправил границу
-    console.log("rkbr")
+  const levelCondition = {
+    experience: 3, 
   }
+
+  function checkCharacter(direction) {
+    if (current.experience >= levelCondition.experience) {
+      console.log(current.experience)  
+    };
+    console.log(direction);
+    setDirection(direction)
+    setMove(true);
+    setTimeout(() => {
+      setNewCharacter();
+      setDirection(0)
+      setMove(false);
+  }, 600);
+  };
+
+  function setNewCharacter() {
+    setCharacter(generateCharacters());
+  };
 
   return (
     <div className="main">
       <div className="game">
-        <SwipeButton onClick={nextCharacter} />
-        {current && (
-          <img src={current.sprite} alt={current.name} className="personFront" />
-        )}
-        <SwipeButton onClick={nextCharacter} />
+        <SwipeButton onClick={() => checkCharacter("left")} />
+        <DrawAnimateCharacter sprite={current.sprite} move={move} direction={direction}></DrawAnimateCharacter>
+        <SwipeButton onClick={() => checkCharacter("right")} />
       </div>
 
           </div>
