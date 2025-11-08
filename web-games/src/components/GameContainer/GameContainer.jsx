@@ -20,41 +20,48 @@ import { DrawAnimateCharacter } from "../Person/DrawAnimateCharacter";
 export default function GameContainer() {
   const [current, setCharacter] = useState(() => generateCharacters());
   const [direction, setDirection] = useState(0);
-  const [score, setScore] = useState(0);
+  const [id, setId] = useState(0);
   const [level, setLevel] = useState(0);
   const [move, setMove] = useState(false);
 
   const levelCondition = {
-    experience: 3, 
-  }
+    experience: 3,
+  };
 
   function checkCharacter(direction) {
-    if (current.experience >= levelCondition.experience) {
-      console.log(current.experience)  
-    };
-    console.log(direction);
-    setDirection(direction)
-    setMove(true);
-    setTimeout(() => {
-      setNewCharacter();
-      setDirection(0)
-      setMove(false);
-  }, 600);
-  };
+    if (!move) {
+      if (current.experience >= levelCondition.experience) {
+        console.log(current.experience);
+      }
+      console.log(direction);
+      setDirection(direction);
+      setMove(true);
+      setTimeout(() => {
+        setNewCharacter();
+        setDirection(0);
+        setMove(false);
+      }, 600);
+    }
+  }
 
   function setNewCharacter() {
     setCharacter(generateCharacters());
-  };
+    setId(id + 1);
+  }
 
   return (
     <div className="main">
       <div className="game">
         <SwipeButton onClick={() => checkCharacter("left")} />
-        <DrawAnimateCharacter sprite={current.sprite} move={move} direction={direction}></DrawAnimateCharacter>
+        <DrawAnimateCharacter
+          key={id}
+          sprite={current.sprite}
+          move={move}
+          direction={direction}
+        ></DrawAnimateCharacter>
         <SwipeButton onClick={() => checkCharacter("right")} />
       </div>
-
-          </div>
+    </div>
   );
 };
 
