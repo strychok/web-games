@@ -17,7 +17,7 @@ import { DrawAnimateCharacter } from "../Person/DrawAnimateCharacter";
 //   return {characters, current, index, score, nextCharacter};
 // }
 
-export default function GameContainer() {
+export default function GameContainer() {  
   const [current, setCharacter] = useState(() => generateCharacters());
   const [direction, setDirection] = useState(0);
   const [id, setId] = useState(0);
@@ -55,7 +55,7 @@ export default function GameContainer() {
         <SwipeButton onClick={() => checkCharacter("left")} />
         <DrawAnimateCharacter
           key={id}
-          sprite={current.sprite}
+          sprite={current.sprite["path"]}
           move={move}
           direction={direction}
         ></DrawAnimateCharacter>
