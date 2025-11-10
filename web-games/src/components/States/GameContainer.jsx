@@ -17,23 +17,21 @@ import { DrawAnimateCharacter } from "../Person/DrawAnimateCharacter";
 //   return {characters, current, index, score, nextCharacter};
 // }
 
-export default function GameContainer() {  
+export default function GameContainer({condition}) {  
   const [current, setCharacter] = useState(() => generateCharacters());
   const [direction, setDirection] = useState(0);
   const [id, setId] = useState(0);
   const [level, setLevel] = useState(0);
   const [move, setMove] = useState(false);
 
-  const levelCondition = {
-    experience: 3,
-  };
+  const levelCondition = condition["condition"]
 
   function checkCharacter(direction) {
     if (!move) {
-      if (current.experience >= levelCondition.experience) {
-        console.log(current.experience);
+      if ((current.experience >= levelCondition["experience"]) & (levelCondition.colors.includes(current.sprite.description))) {
+        console.log("Подошел!" + current.experience + current.sprite.description);
       }
-      console.log(direction);
+      // console.log(levelCondition);
       setDirection(direction);
       setMove(true);
       setTimeout(() => {

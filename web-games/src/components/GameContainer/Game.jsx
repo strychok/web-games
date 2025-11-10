@@ -11,7 +11,7 @@ export function HrGame(){
     const [condition, setCondition] = useState(null);
     
     const [gameState, setGameState] = useState(false);
-    const [level, setLevel] = useState(0);
+    const [level, setLevel] = useState(1);
 
     function StartGame() {
         setStartState(false);
@@ -27,7 +27,7 @@ export function HrGame(){
         <div className="game">
             {startState && <StartScreen onClick={StartGame}></StartScreen>}
             {conditionState && <ConditionScreen level={condition} roundFunction={StartRound}></ConditionScreen>}
-            {gameState && <GameContainer></GameContainer>}
+            {gameState && <GameContainer condition={condition}></GameContainer>}
         </div>
 
     )
