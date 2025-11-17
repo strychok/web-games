@@ -3,6 +3,7 @@ import { useState } from "react";
 import { StartScreen } from "../States/StartScreen";
 import { ConditionScreen } from "../States/ConditionScreen";
 import { GenerateCondition } from "../GenerateCondition";
+import { EndGameScreen } from "../States/EndGameScreen";
 
 export function HrGame(){
     const [startState, setStartState] = useState(true);
@@ -13,6 +14,9 @@ export function HrGame(){
     const [gameState, setGameState] = useState(false);
     const [level, setLevel] = useState(1);
 
+    const [endgameState, setEndgameState] = useState(false)
+
+
     function StartGame() {
         setStartState(false);
         setConditionState(true);
@@ -22,12 +26,17 @@ export function HrGame(){
         setConditionState(false);
         setGameState(true);
     };
+    function EndGame(){
+        setGameState(false);
+        setEndgameState(true)
+    }
 
     return(
         <div className="game">
             {startState && <StartScreen onClick={StartGame}></StartScreen>}
             {conditionState && <ConditionScreen level={condition} roundFunction={StartRound}></ConditionScreen>}
-            {gameState && <GameContainer condition={condition}></GameContainer>}
+            {gameState && <GameContainer condition={condition} endgameFunction={EndGame}></GameContainer>}
+            {endgameState && <EndGameScreen></EndGameScreen>}
         </div>
 
     )

@@ -3,6 +3,7 @@ import { generateCharacters } from "../Person/GenerateCharacters";
 import { useState } from "react";
 import SwipeButton from "../Button";
 import { DrawAnimateCharacter } from "../Person/DrawAnimateCharacter";
+import { Timer } from "../UI/Timer";
 
 // function useGameLogic(){
 //   const [characters] = useState(() => generateCharacters(5));
@@ -17,7 +18,8 @@ import { DrawAnimateCharacter } from "../Person/DrawAnimateCharacter";
 //   return {characters, current, index, score, nextCharacter};
 // }
 
-export default function GameContainer({condition}) {  
+export default function GameContainer({condition, endgameFunction}) {  
+  console.log(endgameFunction)
   const [current, setCharacter] = useState(() => generateCharacters());
   const [direction, setDirection] = useState(0);
   const [id, setId] = useState(0);
@@ -49,6 +51,7 @@ export default function GameContainer({condition}) {
 
   return (
     <div className="main">
+      <Timer endgameFunction={endgameFunction}></Timer>
       <div className="game">
         <SwipeButton onClick={() => checkCharacter("left")} />
         <DrawAnimateCharacter
