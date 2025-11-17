@@ -1,7 +1,7 @@
 import { time } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 
-export function Timer({ initialSeconds = 5, endgameFunction }) {
+export function Timer({ initialSeconds = 60, endgameFunction }) {
   const [seconds, setSeconds] = useState(initialSeconds);
   const timerId = useRef(null);
 
@@ -32,5 +32,5 @@ export function Timer({ initialSeconds = 5, endgameFunction }) {
     timerId.current = null;
   }
 
-  return <div>{seconds}</div>;
+  return <div className="timer">{seconds}</div>;
 }

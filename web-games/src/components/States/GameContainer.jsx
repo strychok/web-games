@@ -4,6 +4,7 @@ import { useState } from "react";
 import SwipeButton from "../Button";
 import { DrawAnimateCharacter } from "../Person/DrawAnimateCharacter";
 import { Timer } from "../UI/Timer";
+import { Ui } from "../UI/BottomMenu";
 
 // function useGameLogic(){
 //   const [characters] = useState(() => generateCharacters(5));
@@ -62,15 +63,16 @@ export default function GameContainer({condition, endgameFunction}) {
         ></DrawAnimateCharacter>
         <SwipeButton onClick={() => checkCharacter("right")} />
       </div>
+      <Ui personExperience={current.experience}></Ui>
     </div>
   );
 };
 
-function Interface (){
-    return (
-        <div className="interfaceContainer">
-            <div className="timer">10s</div>
-            <div className="bottomMenu"></div>
-        </div>
-    );
-};
+// function Interface (){
+//     return (
+//         <div className="interfaceContainer">
+//             <div className="timer">10s</div>
+//             <div className="bottomMenu"></div>
+//         </div>
+//     );
+// };
